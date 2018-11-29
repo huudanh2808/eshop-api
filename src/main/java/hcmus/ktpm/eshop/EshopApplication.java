@@ -2,8 +2,10 @@ package hcmus.ktpm.eshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"hcmus.ktpm.eshop"})
 public class EshopApplication {
 
 	public static void main(String[] args) {
