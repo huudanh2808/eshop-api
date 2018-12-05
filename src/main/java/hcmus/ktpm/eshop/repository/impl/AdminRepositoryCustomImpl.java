@@ -14,11 +14,12 @@ public class AdminRepositoryCustomImpl implements AdminRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-    public Admin findByUserName(String userName) {
+    public Admin getAdmin(String userName, String password) {
         return new JPAQuery<Admin>(entityManager)
                 .select(QAdmin.admin)
                 .from(QAdmin.admin)
-                .where(QAdmin.admin.userName.eq(userName))
+                .where(QAdmin.admin.userName.eq(userName)
+                        .and(QAdmin.admin.password.eq(password)))
                 .fetchOne();
     }
 }
