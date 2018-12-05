@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,16 +19,16 @@ public class Order {
     @Column(name = "time_place")
     private LocalDate timePlace;
 
-    @Column(name ="status")
+    @Column(name = "status")
     private Integer status;
 
     @Column(name = "total_price")
     private Integer totalPrice;
 
-    @ManyToMany(mappedBy = "orders")
+    @ManyToMany(mappedBy = "orders", fetch = FetchType.LAZY)
     private List<Product> products;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "email")
     private Client client;
 }

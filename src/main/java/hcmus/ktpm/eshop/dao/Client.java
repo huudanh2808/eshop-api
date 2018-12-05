@@ -32,6 +32,6 @@ public class Client {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Order> orders;
 }

@@ -19,6 +19,6 @@ public class ClassProduct {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classProduct", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 }

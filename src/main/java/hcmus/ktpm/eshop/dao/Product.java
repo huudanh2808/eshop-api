@@ -1,8 +1,7 @@
 package hcmus.ktpm.eshop.dao;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,12 +9,15 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "product")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
-    @Column(name = "id_product")
+    @Column(name = "id_product", nullable = false)
     private String id;
 
     @Column(name = "name")
@@ -60,7 +62,7 @@ public class Product {
     @JoinColumn(name = "id_author")
     private Author author;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name="product_order", joinColumns={@JoinColumn(referencedColumnName="id_product")}
             , inverseJoinColumns={@JoinColumn(referencedColumnName="id_order")})
     private List<Order> orders;

@@ -8,18 +8,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "product_order")
-public class ProductOrder {
+public class ProductOrder implements Serializable {
     @Id
-    @Column(name = "id_order")
+    @Column(name = "id_order", nullable = false)
     private Integer oderId;
 
     @Id
-    @Column(name = "id_order")
+    @Column(name = "id_product", nullable = false)
     private String productId;
 
     @Column(name = "amount")
