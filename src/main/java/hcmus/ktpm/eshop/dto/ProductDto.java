@@ -1,8 +1,6 @@
 package hcmus.ktpm.eshop.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -10,6 +8,8 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDto {
 
     private String id;
@@ -39,5 +39,11 @@ public class ProductDto {
     private Integer classProductId;
 
     private Integer authorId;
+
+    private String manufacturerName;
+
+    private String classProductName;
+
+    private String authorName;
 
 }

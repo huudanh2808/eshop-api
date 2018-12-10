@@ -1,5 +1,6 @@
 package hcmus.ktpm.eshop.repository;
 
+import hcmus.ktpm.eshop.dao.ClassProduct;
 import hcmus.ktpm.eshop.dao.Product;
 
 import java.util.List;
@@ -20,4 +21,12 @@ public interface ProductRepositoryCustom {
     List<Product> getProductsByTypeId(Integer typeId, Integer page);
 
     List<Product> getProductsByManufacturerId(Integer manuId, Integer page);
+
+    List<Map<String,Object>> getRevenuePerProductType();
+
+    List<Product> getTopNewProducts();
+
+    List<Product> getTopSaleProducts();
+
+    List<Product> getTopViewedProduct();
 }

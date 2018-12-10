@@ -1,22 +1,30 @@
 package hcmus.ktpm.eshop.service.impl;
 
+import hcmus.ktpm.eshop.constant.ProductConstant;
 import hcmus.ktpm.eshop.dao.Product;
+import hcmus.ktpm.eshop.dao.QProduct;
 import hcmus.ktpm.eshop.dto.ProductDto;
 import hcmus.ktpm.eshop.mapper.ProductMapper;
+import hcmus.ktpm.eshop.repository.ClassProductRepository;
 import hcmus.ktpm.eshop.repository.ProductRepository;
 import hcmus.ktpm.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
+
+    @Autowired
+    private ClassProductRepository classProductRepository;
 
     @Override
     public List<ProductDto> loadAllProduct(Integer page) {
@@ -60,5 +68,66 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Long countAllProductByManufacturer(Integer manuId) {
         return productRepository.countByManufacturerId(manuId);
+    }
+
+    @Override
+    public List<Map<String, Object>> calcuRevenuePerProductType() {
+        return productRepository.getRevenuePerProductType();
+    }
+
+    @Override
+    public Map<String, Object> getProductAndIsItOutOfStock(String productId) {
+        Map<String, Object> result = new HashMap<>();
+        Product product = productRepository.getOne(productId);
+        result.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
+        result.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
+        return result;
+    }
+
+    @Override
+    public List<Map<String, Object>> getTopNewProducts() {
+        return productRepository.getTopNewProducts().stream()
+                .map(product -> {
+                    Map<String, Object> oneRow = new HashMap<>();
+                    oneRow.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
+                    oneRow.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
+                    return oneRow;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Map<String, Object>> getTopSaleProducts() {
+        return productRepository.getTopSaleProducts().stream()
+                .map(product -> {
+                    Map<String, Object> oneRow = new HashMap<>();
+                    oneRow.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
+                    oneRow.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
+                    return oneRow;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Map<String, Object>> getTopViewedProducts() {
+        return productRepository.getTopViewedProduct().stream()
+                .map(product -> {
+                    Map<String, Object> oneRow = new HashMap<>();
+                    oneRow.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
+                    oneRow.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
+                    return oneRow;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto getProductDetail(String productId) {
+        Optional<Product> product = productRepository.findOne(QProduct.product.id.eq(productId));
+        if (product.isPresent()){
+            return  ProductMapper.toProductDto(productRepository.getOne(productId));
+        }
+        else {
+            return null;
+        }
     }
 }

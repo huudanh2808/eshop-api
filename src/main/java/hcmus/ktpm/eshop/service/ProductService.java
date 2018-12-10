@@ -21,4 +21,17 @@ public interface ProductService {
     List<Map<String, Object>> countPerType();
 
     Long countAllProductByManufacturer(Integer manuId);
+
+    List<Map<String,Object>> calcuRevenuePerProductType();
+
+    Map<String,Object> getProductAndIsItOutOfStock(String productId);
+
+    List<Map<String,Object>> getTopNewProducts();
+
+    List<Map<String,Object>> getTopSaleProducts();
+
+    List<Map<String,Object>> getTopViewedProducts();
+
+    ProductDto getProductDetail(String productId);
+
 }

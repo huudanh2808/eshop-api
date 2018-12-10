@@ -25,6 +25,9 @@ public class ProductMapper {
                 .classProductId(product.getClassProduct().getId())
                 .manufacturerId(product.getManufacturer().getId())
                 .authorId(product.getAuthor().getId())
+                .classProductName(product.getClassProduct().getName())
+                .authorName(product.getAuthor().getName())
+                .manufacturerName(product.getManufacturer().getName())
                 .build();
     }
 
