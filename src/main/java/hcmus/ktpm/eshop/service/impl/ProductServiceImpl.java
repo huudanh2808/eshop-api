@@ -11,6 +11,7 @@ import hcmus.ktpm.eshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(rollbackOn = Throwable.class)
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -129,5 +131,13 @@ public class ProductServiceImpl implements ProductService {
         else {
             return null;
         }
+    }
+
+    @Override
+    public List<ProductDto> getSample() {
+        List<Product> products = productRepository.getSampleProduct();
+        return products.stream()
+                .map(ProductMapper::toProductDto)
+                .collect(Collectors.toList());
     }
 }

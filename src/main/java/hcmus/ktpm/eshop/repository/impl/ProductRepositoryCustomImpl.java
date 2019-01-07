@@ -1,6 +1,8 @@
 package hcmus.ktpm.eshop.repository.impl;
 
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.dsl.MathExpressions;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import hcmus.ktpm.eshop.constant.DataConstant;
 import hcmus.ktpm.eshop.constant.ProductConstant;
@@ -10,10 +12,7 @@ import hcmus.ktpm.eshop.repository.ProductRepositoryCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
@@ -146,6 +145,20 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
                 .from(QProduct.product)
                 .orderBy(QProduct.product.viewCount.desc())
                 .limit(DataConstant.PRODUCT_PER_TOP)
+                .offset(0)
+                .fetch();
+    }
+
+    @Override
+    public List<Product> getSampleProduct() {
+        Random rand = new Random();
+        Integer n = rand.nextInt(10) + 1;
+        return new JPAQuery<QProduct>(entityManager)
+                .select(QProduct.product)
+                .from(QProduct.product)
+                .where(QProduct.product.id.contains(n.toString()))
+                .orderBy(QProduct.product.publishDate.desc())
+                .limit(DataConstant.PRODUCT_SAMPLE_NUMBER)
                 .offset(0)
                 .fetch();
     }

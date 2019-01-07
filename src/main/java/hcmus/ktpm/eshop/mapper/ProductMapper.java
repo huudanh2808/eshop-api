@@ -5,11 +5,12 @@ import hcmus.ktpm.eshop.dto.ProductDto;
 
 /**
  * An util to map Product DAO to Product DTO
- * */
+ */
 public class ProductMapper {
-    private ProductMapper() {}
+    private ProductMapper() {
+    }
 
-    public static ProductDto toProductDto(Product product){
+    public static ProductDto toProductDto(Product product) {
         return ProductDto.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -28,6 +29,7 @@ public class ProductMapper {
                 .classProductName(product.getClassProduct().getName())
                 .authorName(product.getAuthor().getName())
                 .manufacturerName(product.getManufacturer().getName())
+                .isOutOfStock(product.getInStock() <= 0)
                 .build();
     }
 

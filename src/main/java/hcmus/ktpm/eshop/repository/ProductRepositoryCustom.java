@@ -29,4 +29,6 @@ public interface ProductRepositoryCustom {
     List<Product> getTopSaleProducts();
 
     List<Product> getTopViewedProduct();
+
+    List<Product> getSampleProduct();
 }

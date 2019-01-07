@@ -88,6 +88,11 @@ public class ProductServiceController {
         return productService.getProductDetail(productId);
     }
 
+    @RequestMapping("/product/get-sample")
+    public List<ProductDto> getSampleProduct() {
+        return productService.getSample();
+    }
+
     @RequestMapping("/product/test")
     public List<Map<String, Object>> test() {
         return productService.calcuRevenuePerProductType();

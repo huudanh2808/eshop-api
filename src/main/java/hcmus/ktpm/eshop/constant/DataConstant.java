@@ -6,5 +6,6 @@ package hcmus.ktpm.eshop.constant;
  * */
 public class DataConstant {
     public static final int PRODUCT_PER_PAGE = 20;
-    public static final int PRODUCT_PER_TOP = 20;
+    public static final int PRODUCT_PER_TOP = 10;
+    public static final int PRODUCT_SAMPLE_NUMBER = 48;
 }

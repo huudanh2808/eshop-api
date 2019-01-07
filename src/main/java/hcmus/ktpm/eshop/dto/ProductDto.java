@@ -1,5 +1,6 @@
 package hcmus.ktpm.eshop.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -46,4 +47,6 @@ public class ProductDto {
 
     private String authorName;
 
+    @JsonProperty("out_of_stock")
+    private boolean isOutOfStock;
 }

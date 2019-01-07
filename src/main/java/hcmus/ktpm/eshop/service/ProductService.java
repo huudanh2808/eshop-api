@@ -34,4 +34,6 @@ public interface ProductService {
 
     ProductDto getProductDetail(String productId);
 
+    List<ProductDto> getSample();
+
 }
