@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ProductDto {
 
+    @JsonProperty("id_product")
     private String id;
 
     private String name;
