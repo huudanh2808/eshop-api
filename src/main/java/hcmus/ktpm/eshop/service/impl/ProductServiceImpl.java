@@ -87,38 +87,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Map<String, Object>> getTopNewProducts() {
+    public List<ProductDto> getTopNewProducts() {
         return productRepository.getTopNewProducts().stream()
-                .map(product -> {
-                    Map<String, Object> oneRow = new HashMap<>();
-                    oneRow.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
-                    oneRow.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
-                    return oneRow;
-                })
+                .map(ProductMapper::toProductDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Map<String, Object>> getTopSaleProducts() {
+    public List<ProductDto> getTopSaleProducts() {
         return productRepository.getTopSaleProducts().stream()
-                .map(product -> {
-                    Map<String, Object> oneRow = new HashMap<>();
-                    oneRow.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
-                    oneRow.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
-                    return oneRow;
-                })
+                .map(ProductMapper::toProductDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Map<String, Object>> getTopViewedProducts() {
+    public List<ProductDto> getTopViewedProducts() {
         return productRepository.getTopViewedProduct().stream()
-                .map(product -> {
-                    Map<String, Object> oneRow = new HashMap<>();
-                    oneRow.put(ProductConstant.PRODUCT_KEY, ProductMapper.toProductDto(product));
-                    oneRow.put(ProductConstant.PRODUCT_OUT_STOCK_KEY, product.getInStock() <= 0);
-                    return oneRow;
-                })
+                .map(ProductMapper::toProductDto)
                 .collect(Collectors.toList());
     }
 

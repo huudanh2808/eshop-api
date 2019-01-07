@@ -26,11 +26,11 @@ public interface ProductService {
 
     Map<String,Object> getProductAndIsItOutOfStock(String productId);
 
-    List<Map<String,Object>> getTopNewProducts();
+    List<ProductDto> getTopNewProducts();
 
-    List<Map<String,Object>> getTopSaleProducts();
+    List<ProductDto> getTopSaleProducts();
 
-    List<Map<String,Object>> getTopViewedProducts();
+    List<ProductDto> getTopViewedProducts();
 
     ProductDto getProductDetail(String productId);
 

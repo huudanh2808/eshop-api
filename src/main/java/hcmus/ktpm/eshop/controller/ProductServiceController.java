@@ -69,17 +69,17 @@ public class ProductServiceController {
     }
 
     @RequestMapping("/product/get-top-new")
-    public List<Map<String, Object>> getTopNewProducts() {
+    public List<ProductDto> getTopNewProducts() {
         return productService.getTopNewProducts();
     }
 
     @RequestMapping("/product/get-top-sale")
-    public List<Map<String, Object>> getTopSaleProducts() {
+    public List<ProductDto> getTopSaleProducts() {
         return productService.getTopSaleProducts();
     }
 
     @RequestMapping("/product/get-top-viewed")
-    public List<Map<String, Object>> getTopViewedProduct() {
+    public List<ProductDto> getTopViewedProduct() {
         return productService.getTopViewedProducts();
     }
 
